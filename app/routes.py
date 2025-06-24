@@ -78,3 +78,18 @@ def editar_tarefa(id):
         return redirect(url_for('main.dashboard'))
     
     return render_template('editar_tarefa.html', tarefa = tarefa)
+
+
+@main.route('/excluir/<int:id>', methods=['POST'])
+@login_required
+def excluir_tarefa(id):
+    tarefa = Task.query.get_or_404(id)
+    
+    if tarefa.user_id != current_user.id:
+        flash("Você não tem permissão para excluir essa tarefa.")
+        return redirect(url_for('main.dashboard'))
+    
+    db.session.delete(tarefa)
+    db.session.commit()
+    flash('Tarefa excluída com sucesso!')
+    return redirect(url_for('main.dashboard'))
