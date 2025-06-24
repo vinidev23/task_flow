@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Painel</title>
+</head>
+<body>
+
+    <h1>Olá {{ current_user.username }}!</h1>
+    <h2>Suas Tarefas</h2>
+
+    <a href="{{ url_for('auth.logout') }}">Sair</a>
+    <a href="{{ url_for('main.nova_tarefa') }}">Nova Tarefa</a>
+
+    {% if tarefas %}
+        <ul>
+            {% for t in tarefas %}
+                <li>
+                    <strong>{{ t.title }}</strong> - {{ t.status }} - Entrega: {{ t.due_date or "Sem Data" }}
+                    <a href="#">Editar</a> | <a href="#">Excluir</a>
+                </li>
+                {{% endfor %}}
+        </ul>
+    {% else %}
+        <p>Nenhuma tarefa encontrada.</p>
+    {% endif %}
+</body>
+</html>
