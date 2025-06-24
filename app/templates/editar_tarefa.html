@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Editar Tarefa</title>
+</head>
+<body>
+
+    <h1>Editar Tarefa</h1>
+
+    <form method="POST">
+    <input type="text" name="title" placeholder="Título" value="{{ tarefa.title }}" required><br>
+    <textarea type="text" name="description" placeholder="Descrição" value="{{ tarefa.description }}"></textarea><br>
+
+    <label>Status:</label>
+    <select name="status">
+        <option value="Pendente" {% if tarefa.status == 'Pendente' %}selected{% endif %}>Pendente</option>
+        <option value="Em Andamento" {% if tarefa.status == 'Em Andamento' %}selected{% endif %}>Em Andamento</option>
+        <option value="Concluído" {% if tarefa.status == 'Concluído' %}selected{% endif %}>Concluído</option>
+    </select><br>
+
+    <label>Data de Entrega:</label>
+    <input type="date" name="due_date" value="{{ tarefa.due_date }}"><br><br>
+
+    <button type="submit">Salvar Alterações</button>
+    </form>
+
+    <a href="{{ url_for('main.dashboard') }}">Cancelar</a>
+</body>
+</html>

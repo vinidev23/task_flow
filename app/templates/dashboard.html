@@ -18,7 +18,7 @@
             {% for t in tarefas %}
                 <li>
                     <strong>{{ t.title }}</strong> - {{ t.status }} - Entrega: {{ t.due_date or "Sem Data" }}
-                    <a href="#">Editar</a> | <a href="#">Excluir</a>
+                    <a href="{{ url_for('main.editar_tarefa', id = t.id) }}">Editar</a> | <a href="#">Excluir</a>
                 </li>
                 {% endfor %}
         </ul>
