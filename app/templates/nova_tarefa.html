@@ -1,31 +1,21 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskFlow - Nova Tarefa</title>
-</head>
-<body>
+{% extends 'home.html' %}
 
-    <h1>Criar Nova Tarefa</h1>
+{% block title %}Nova Tarefa - TaskFlow{% endblock %}
 
-    <form method="POST">
-        <input type="text" name="title" placeholder="Título" required><br>
-        <textarea name="description" placeholder="Descrição"></textarea><br>
-
-    <label>Status:</label>
+{% block content %}
+<h2 style="text-align: center;">Nova Tarefa</h2>
+<form method="POST">
+    <input type="text" name="title" placeholder="Título" required>
+    <textarea name="description" placeholder="Descrição" rows="4"></textarea>
+    
     <select name="status" required>
-        <option value="Pendente">Pendente</option>
-        <option value="Em Andamento">Em Andamento</option>
-        <option value="Concluído">Concluído</option>
-    </select><br>
+        <option value="" disabled selected>Status</option>
+        <option value="pendente">Pendente</option>
+        <option value="em andamento">Em andamento</option>
+        <option value="concluída">Concluída</option>
+    </select>
 
-    <label>Data de Entrega:</label>
-    <input type="date" name="due_date"><br><br>
-
-    <button type="submit">Salvar</button>
-    </form>
-
-    <a href="{{ url_for('main.dashboard') }}">Voltar</a>
-</body>
-</html>
+    <input type="date" name="due_date" placeholder="Data de entrega">
+    <button class="btregister" type="submit">Criar Tarefa</button>
+</form>
+{% endblock %}

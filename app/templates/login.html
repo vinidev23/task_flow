@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskFlow - Login</title>
-</head>
-<body>
-    <h2>Login</h2>
-    <form method="POST">
-        <input type="text" name="username" placeholder="Usuário" required>
-        <input type="password" name="password" placeholder="Senha" required>
-        <button type="submit">Entrar</button>
-    </form>
-    <a href="/register">Não tem conta? Cadastre-se</a>
-</body>
-</html>
+{% extends "home.html" %}
+
+{% block title %}Login - TaskFlow{% endblock %}
+
+{% block content %}
+<h2 style="text-align: center;">Login</h2>
+<form method="POST">
+    <input type="text" name="username" placeholder="Usuário" required>
+    <input type="password" name="password" placeholder="Senha" required>
+    <button class="btregister" type="submit">Entrar</button>
+</form>
+<p style="text-align: center;">
+    <a class="log" href="{{ url_for('auth.register') }}">Não tem conta? <span>Cadastre-se</span></a>
+</p>
+{% endblock %}

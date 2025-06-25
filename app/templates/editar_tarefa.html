@@ -1,31 +1,20 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskFlow - Editar Tarefa</title>
-</head>
-<body>
+{% extends 'home.html' %}
 
-    <h1>Editar Tarefa</h1>
+{% block title %}Editar Tarefa - TaskFlow{% endblock %}
 
-    <form method="POST">
-    <input type="text" name="title" placeholder="Título" value="{{ tarefa.title }}" required><br>
-    <textarea type="text" name="description" placeholder="Descrição" value="{{ tarefa.description }}"></textarea><br>
+{% block content %}
+<h2 style="text-align: center;">Editar Tarefa</h2>
+<form method="POST">
+    <input type="text" name="title" value="{{ tarefa.title }}" required>
+    <textarea name="description" rows="4">{{ tarefa.description }}</textarea>
 
-    <label>Status:</label>
-    <select name="status">
-        <option value="Pendente" {% if tarefa.status == 'Pendente' %}selected{% endif %}>Pendente</option>
-        <option value="Em Andamento" {% if tarefa.status == 'Em Andamento' %}selected{% endif %}>Em Andamento</option>
-        <option value="Concluído" {% if tarefa.status == 'Concluído' %}selected{% endif %}>Concluído</option>
-    </select><br>
+    <select name="status" required>
+        <option value="pendente" {% if tarefa.status == 'pendente' %}selected{% endif %}>Pendente</option>
+        <option value="em andamento" {% if tarefa.status == 'em andamento' %}selected{% endif %}>Em andamento</option>
+        <option value="concluída" {% if tarefa.status == 'concluída' %}selected{% endif %}>Concluída</option>
+    </select>
 
-    <label>Data de Entrega:</label>
-    <input type="date" name="due_date" value="{{ tarefa.due_date }}"><br><br>
-
-    <button type="submit">Salvar Alterações</button>
-    </form>
-
-    <a href="{{ url_for('main.dashboard') }}">Cancelar</a>
-</body>
-</html>
+    <input type="date" name="due_date" value="{{ tarefa.due_date }}">
+    <button class="btregister" type="submit">Salvar Alterações</button>
+</form>
+{% endblock %}

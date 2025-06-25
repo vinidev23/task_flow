@@ -16,10 +16,9 @@ def login():
         
         if user and user.check_password(password):
             login_user(user)
-            return redirect(url_for('main.home'))
+            return redirect(url_for('main.dashboard'))
         else:
             flash('Usuário ou senha inválidos')
-        return render_template('login.html')
     
     return render_template('login.html')
     

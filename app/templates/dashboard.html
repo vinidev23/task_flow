@@ -8,35 +8,38 @@
 <body>
 
     <h1>Olá {{ current_user.username }}!</h1>
-    <h2>Suas Tarefas</h2>
 
-    <a href="{{ url_for('auth.logout') }}">Sair</a>
-    <a href="{{ url_for('main.nova_tarefa') }}">Nova Tarefa</a>
+ {% extends 'home.html' %}
 
-    {% if tarefas %}
-    <form method="get" action="{{ url_for('main.dashboard') }}">
-        <label for="status">Filtrar por Status:</label>
-        <select name="status" id="status" onchange="this.form.submit()">
+{% block title %}Dashboard - TaskFlow{% endblock %}
+
+{% block content %}
+    <h2>Minhas Tarefas</h2>
+
+    <form method="get">
+        <label>Status:</label>
+        <select name="status" onchange="this.form.submit()">
             <option value="">Todos</option>
             <option value="Pendente" {% if status_atual == 'Pendente' %}selected{% endif %}>Pendente</option>
             <option value="Em Andamento" {% if status_atual == 'Em Andamento' %}selected{% endif %}>Em Andamento</option>
-            <option value="Concluído" {% if status_atual == 'Concluído' %}selected{% endif %}>Concluído</option>
+            <option value="Concluída" {% if status_atual == 'Concluída' %}selected{% endif %}>Concluída</option>
         </select>
     </form>
-        <ul>
-            {% for t in tarefas %}
-                <li>
-                    <strong>{{ t.title }}</strong> - {{ t.status }} - Entrega: {{ t.due_date or "Sem Data" }}
-                    <a href="{{ url_for('main.editar_tarefa', id = t.id) }}">Editar</a>
-                    <form action="{{ url_for('main.excluir_tarefa', id = t.id) }}" method="POST" style="display: inline;">
-                        <button type="submit" onclick="return confirm('Tem certeza?')">Excluir</button>
-                    </form>
 
-                </li>
-                {% endfor %}
-        </ul>
-    {% else %}
-        <p>Nenhuma tarefa encontrada.</p>
-    {% endif %}
+    <a href="{{ url_for('main.nova_tarefa') }}" class="btn">Nova Tarefa</a>
+
+    <ul class="tarefas">
+    {% for t in tarefas %}
+        <li>
+            <strong>{{ t.title }}</strong> - {{ t.status }} - {{ t.due_date }}
+            <a class="dash" href="{{ url_for('main.editar_tarefa', id=t.id) }}">Editar</a>
+            <form action="{{ url_for('main.excluir_tarefa', id=t.id) }}" method="POST">
+                <button class="btns" onclick="return confirm('Confirmar exclusão?')">Excluir</button>
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+
 </body>
 </html>

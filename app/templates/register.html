@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskFlow - Cadastro</title>
-</head>
-<body>
-    <h2>Cadastro</h2>
-    <form method="POST">
+{% extends "home.html" %}
+
+{% block title %}Cadastro - TaskFlow{% endblock %}
+
+{% block content %}
+<h2 style="text-align: center;">Cadastro</h2>
+<form method="POST">
     <input type="text" name="username" placeholder="Usuário" required>
     <input type="password" name="password" placeholder="Senha" required>
-    <button type="submit">Cadastrar</button>
-    </form>
-    <a href="/login">Já tem uma conta? Entrar</a>
-</body>
-</html>
+    <button class="btregister" type="submit">Cadastrar</button>
+</form>
+<p style="text-align: center;">
+    <a class="reg" href="{{ url_for('auth.login') }}">Já tem conta? <span>Faça login</span></a>
+</p>
+{% endblock %}
