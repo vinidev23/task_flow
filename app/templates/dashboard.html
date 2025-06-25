@@ -14,6 +14,15 @@
     <a href="{{ url_for('main.nova_tarefa') }}">Nova Tarefa</a>
 
     {% if tarefas %}
+    <form method="get" action="{{ url_for('main.dashboard') }}">
+        <label for="status">Filtrar por Status:</label>
+        <select name="status" id="status" onchange="this.form.submit()">
+            <option value="">Todos</option>
+            <option value="Pendente" {% if status_atual == 'Pendente' %}selected{% endif %}>Pendente</option>
+            <option value="Em Andamento" {% if status_atual == 'Em Andamento' %}selected{% endif %}>Em Andamento</option>
+            <option value="Concluído" {% if status_atual == 'Concluído' %}selected{% endif %}>Concluído</option>
+        </select>
+    </form>
         <ul>
             {% for t in tarefas %}
                 <li>

@@ -13,8 +13,15 @@ def home():
 @main.route('/dashboard')
 @login_required
 def dashboard():
-    tarefas = Task.query.filter_by(user_id = current_user.id).order_by(Task.due_date).all()
-    return render_template('dashboard.html', tarefas = tarefas)
+    status = request.args.get('status')
+    
+    if status and status in ['Pendente', 'Em Andamento', 'Concluído']:
+        tarefas = Task.query.filter_by(user_id=current_user.id, status=status).order_by(Task.due_date).all()
+    else:
+        tarefas = Task.query.filter_by(user_id=current_user.id).order_by(Task.due_date).all()
+        
+    return render_template('dashboard.html', tarefas=tarefas, status_atual=status)
+    
 
 @main.route('/nova', methods=['GET', 'POST'])
 @login_required
